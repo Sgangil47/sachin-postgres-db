@@ -1,0 +1,45 @@
+Hello reader, This file contains the details of postgres database session number:2.
+
+Following are the commands and their use/purpose:
+	1) $docker exec -it [container_id] psql -U [user_name] //Remember that postgres database default user is postgres.
+		-This command is used to go inside an container (execute a conatiner)
+	2) \l is used to show the list of databases.
+	3) \q is used to quite from database.
+	4) \c [database_name] is used to connect with the database.
+	5) \d is used to show the list of realtions/tables in our database.
+
+After that we saw some SQL commands like shown below:
+	1) create table test (id int, name varchar);	//It is one way of creating table
+		-This will create a test table with two attributes/columns/fields i.e. id and name
+		
+	2) insertion of records in table. It can be done in many ways like:
+		i) insert into test values (1,'t1');
+		ii) insert into test values (2,'t2'),(3,'t3'),(4,'t4');
+		iii) insert into test (id, name) values (5,'t5'),(6,'t6');
+		iv) insert into test_dup select name from test where id <= 3;
+		
+	3) Now we saw some commands that is used to modify the schema/structure of any table.
+		i) alter table test add constraint pk_test primary key (id);
+			-This will add a constraint primary key on id column of test table. Here constarint name is pk_test. Note: We can give any name to the constraint.
+			
+		ii) create table test_dup2 as select * from test;	//It is the 2nd way of creating gtable
+			-This will create a table test_dup2 and copy all the records of test table inside test_dup table.
+			-Note that in this type of creation of table only data is copied not the constarints.
+				-If test table has primary key then in test_dup primary key will not be inherited by using this type of table creation.
+				
+		iii) create table test_serial (id serial primary key, name  varchar);
+			-serial is a keyword in postgres which is used to auto-increment the numbers.
+			-serial keyword will only work with integer type of data.
+			-When we use serial keyword then database creates a sequence automatically for that.
+			-insert into test_serial (name) values ('tt');
+				--This will insert a record in test_serial table where id attribute autoincemented and name attribute as given.
+				
+		iv) alter table test_serial add column parent_test int references test(id);
+			-This will add a column parent_test in test_serial table and that parent_test column will become as foriegn key of id column of test table.
+			-Following either 1 or 2 points must be remember while adding a new column in a table
+				1. Do not make it not null
+				2. If making it as not null then define its default value.
+Q. Difference between surrogate key and primary key.
+Ans. -A surrogate key is a made up value with the sole purpose of uniquely identifying a row. Usually, this is represented by an auto incrementing ID
+	while primary key not only uniquely identify a row but can also provide business information about the entity. There
+
