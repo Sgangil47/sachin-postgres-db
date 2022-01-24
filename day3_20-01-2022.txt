@@ -1,0 +1,33 @@
+Hello reader, this file contains the details of postgres database session number: 3rd
+
+create table employees (empid serial primary key, empname varchar, salary int, designation varchar, gender varchar)
+	This query will create a table employees with the mentioned attributes
+	
+select * from employees where salary > 2000 or gender='M' and id =3;
+	This query will find out those employees having salary > 2000 or (gender = 'M' and id = 3)
+	
+select gender, count(*) from employees group by gender;
+	This query will find out the number of male and number of female employees.
+	  -Note: 
+	  	You need to specify all those columns in group by clause that we are going to be select.
+	  	As in the above query we are selecting gender column thus we specify gender column in group by clause. 
+	  	If we select more colimns then we have to mentione them in group by clause also, which is called nested grouping
+	  
+select designation, gender, count(*) from employees group by designation, gender;
+	This is the example of nested grouping.
+	this query will firstly group by designation and after that it will group by gender
+	
+select * from employees order by id;
+		or
+select * from employees order by 1; //1 specify the first column of given table. It will sort the result according to first column.
+	-Both query are same and will give same output.
+	-order by clause is used to sorting the result.
+	-If we do not specify the order then default sorting order is ascending order.
+	
+select * from employees order by salary desc, gender limit 3;
+	This query will output top 3 employees getting highest salary.
+
+
+We have to explore enum data type and all the operators available in postgres.
+	
+	
