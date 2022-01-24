@@ -1,0 +1,26 @@
+Hello reader, this file conatins the details of potgres database session number: 4
+
+We had created an employees table earlier. Now we are creating a departments table here
+	create table departments (dept_id serial primary key, dept_name varchar, location varchar);
+		This query will create a table departments with the specified attributes.
+		
+After that we added a column dept_id in the employees table and make it as foriegn key to dept_id column of departments table as shown below
+	alter table employees add column dept_id int references departments(dept_id);
+		
+update employees set dept_id = 1 where id in (3,5);
+	This query will update the dept_id of those employees having id 3 or 4 or 5
+	
+We talked about Nested query:
+	1) Inner query: In nested query ,inner query runs first, and only once. Outer query is executed with result from Inner query.Hence, Inner query is used in execution of Outer query.
+	2) Correlated Query: In correlated query, Outer query executes first and for every Outer query row Inner query is executed. Hence, Inner query uses values from Outer query.
+	
+self join:
+	select e.id, e.ename, e.designation, m.id as mgr_id m.name as mgr_name from employees e inner join employees m on e.manager = m.id;
+		-This query will output the employees and their reporting ,managers. It is the example of self join.
+		
+INITCAP:
+	This function is used to make first letter of a given string as capital letter.
+syntax: INITCAP(string)
+
+	
+
