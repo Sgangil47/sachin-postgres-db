@@ -1,0 +1,40 @@
+Hello reader, this file conatins the details of postgres database session number: 5
+In this session we discussed about view in postgres
+view: 
+	A view is a named query that provides another way to present data in the database tables. A view is defined based on one or more tables which are known as base tables. When you create a view, you basically create a query and assign a name to the query. Therefore, a view is useful for wrapping a commonly used complex query.
+	
+Example:
+	craete view v_emp_full_rec as select * from employees;
+		or
+	create view v_emp_full_rec  as select id as emp_id, name as emp_name, designation, salary as emp_salary, gender from employees;
+
+enum data type in postgres:
+	It is just an user defined data type.
+syntax:
+	create type enum_name as enum (value1,value2,.....);
+example:
+	create type e_gender as enum ('M','F');
+	
+Now we saw that we can change column data type from varchar to enum
+	alter table employees alter column gender type e_gender using gender::e_gender;
+	
+We can change column data type from enum to varchar as well
+	alter table table_name alter column column_name type varchar;
+example:
+	alter table employees alter column gender type varchar;
+
+-We can not delete or update existing values in an existing enum.
+-we can add new values to an existing enum like shown below
+	i) alter type enum_name add value 'new_value';
+	  example:
+		alter type e_gender add value 'Male'; // it will add new value at the end of enum like e_gender('M','F','Male')
+	ii) alter type enum_name add value 'new_vaue' before 'old_value';
+	  example:
+	  	alter type e_gender add value 'm' before 'M';
+	 ii) alter type enum_name add value 'new_vaue' after 'old_value';
+	  example:
+	  	alter type e_gender add value 'm' before 'M';
+
+	  
+		
+	
